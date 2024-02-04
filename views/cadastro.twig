@@ -1,0 +1,65 @@
+{% extends 'template.twig' %}
+{% block titulo%}Cadastro{% endblock %}
+{% block content %}
+    <div class="columns is-centered">
+        <div class="column is-5">
+            <div class="box" style="margin-top: 90px;">
+                <div class="columns">
+                    <div class="column is-full">
+                        <form method="post" action="{{ path_for('cadastrar')}}">
+                            <h1 class="title has-text-centered">Cadastro de novo usuário</h1>
+                            <div class="field">
+                                <label class="label" for="email">Email</label>
+                                <div class="control">
+                                    {% set classe_input_email = "input" %}
+                                    {% if email_ja_usado == true %}
+                                    {% set classe_input_email = "input is-danger" %}
+                                    {% endif %}
+                                    {% if email_disponivel == true %}
+                                    {% set classe_input_email = "input is-success" %}
+                                    {% endif %}
+                                    <input class="{{ classe_input_email }}" name="email" type="email" id="email" value="{{ email }}" required>
+                                </div>
+                                {% if email_ja_usado == true %}
+                                    <p class="help">Este email já foi usado.</p>
+                                {% endif %}
+                                {% if email_disponivel == true %}
+                                    <p class="help">Este email pode ser usado.</p>
+                                {% endif %}
+                            </div>
+                            <div class="field">
+                                <label class="label" for="nome">Nome</label>
+                                <div class="control">
+                                    <input class="input" type="text" name="nome" id="nome" title="Preencha com pelo menos 3 caracteres" pattern="^[^*]{3,}$" value="{{ nome }}" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="senha">Senha</label>
+                                <div class="control">
+                                    <input class="input" type="password" pattern="^[^*]{8}" name="senha" id="senha"  value="{{senha}}" title="preencha com 8 caracteres" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="confirmar_senha">Confirme a Senha</label>
+                                <div class="control">
+                                    {% set classe_input_conf_senha = "input" %}
+                                    {% if conf_senha_falha == true %}
+                                    {% set classe_input_conf_senha = "input is-danger" %}
+                                    {% endif %}
+                                    {% if conf_senha_ok == true %}
+                                    {% set classe_input_conf_senha = "input is-success" %}
+                                    {% endif %}
+                                    <input class="{{classe_input_conf_senha}}" type="password" pattern="^[^*]{8}" id="confirmar_senha" name="confirmar_senha" value="{{confirmar_senha}}" title="preencha com 8 caracteres igual à senha" required>
+                                </div>
+                                {% if conf_senha_falha == true %}
+                                    <p class="help">A confirmação da senha não bate com a senha.</p>
+                                {% endif %}
+                            </div>
+                            <p class="has-text-centered"><button type="reset" class="button is-warning">Limpar</button><button type="submit" class="button is-success">Cadastrar</button></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

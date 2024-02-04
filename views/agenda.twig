@@ -1,0 +1,41 @@
+{% extends 'template.twig' %}
+{% block titulo%}Cadastro{% endblock %}
+{% block content %}
+    <div class="columns is-centered">
+        <div class="column is-5">
+            <div class="box" style="margin-top: 90px;">
+                <div class="columns">
+                    <div class="column is-full">
+                        <h1 class="title has-text-centered">Agenda</h1>
+                        <p class="has-text-centered"><strong>Usuário:</strong> {{ nome_usuario }}</p>
+                        <p style="margin-top:7px;" class="has-text-centered"><a href="{{ path_for('incluir_novo_contato')}}" class="button is-success">Cadastrar</a></p>
+                        <table style="margin-top:7px;"  class="table is-bordered is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {% if contatos|length > 0 %}
+                                    {% for contato in contatos %}
+                                    <tr>
+                                        <td>{{ contato.nome }}</td>
+                                        <td>{{ contato.telefone }}</td>
+                                        <td><a href="{{ path_for('form_excluir_contato',{'id': contato.id})}}" class="button is-danger">Apagar</a><a href="{{ path_for('form_atualizar_contato',{'id': contato.id})}}" class="button is-info">Modificar</a></td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr><td colspan="3" class="has-text-centered">Não há dados.</td></tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <p class="has-text-centered"><a href="{{ path_for('sair')}}" class="button is-danger">Sair</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

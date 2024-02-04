@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block titulo %}Document{% endblock %}</title>
+        
+        <link rel="stylesheet" href="/assets/bulma.css">
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+            ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+        {% block content %}{% endblock %}
+        {% block footer %}{% endblock %}
+    </div>
+</body>
+</html>

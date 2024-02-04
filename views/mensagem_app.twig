@@ -1,0 +1,18 @@
+{% extends 'template.twig' %}
+{% block titulo%}Mensagem do App{% endblock %}
+{% block content %}
+    <div class="columns is-centered">
+        <div class="column is-5">
+            <div class="box" style="margin-top: 90px;">
+                <div class="columns">
+                    <div class="column is-full">
+                        
+                        <h1 class="title has-text-centered">Mensagem do App</h1>
+                        <p class="has-text-justified">{{ mensagem }}</p>
+                        <p class="has-text-right"><a href="{{ path_for(nome_rota)}}" class="button is-success">Ok</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{
+    "require": {
+        "slim/slim": "3.*",
+        "vlucas/phpdotenv": "^5.5",
+        "fpdf/fpdf": "^1.86",
+        "slim/twig-view": "^2.5",
+        "bryanjhv/slim-session": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "lib\\": "lib/"
+        }
+    }
+}

@@ -1,0 +1,34 @@
+{% extends 'template.twig' %}
+{% block titulo%}Login{% endblock %}
+{% block content %}
+    <div class="columns is-centered">
+        <div class="column is-5">
+            <div class="box" style="margin-top: 90px;">
+                <div class="columns">
+                    <div class="column is-full">
+                        <form method="post" action="{{ path_for('logar')}}">
+                            <h1 class="title has-text-centered">Login</h1>
+                            <div class="field">
+                                <label class="label" for="email">Email</label>
+                                <div class="control">
+                                    <input class="input" name="email" type="email" id="email" value="{{ email }}" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="senha">Senha</label>
+                                <div class="control">
+                                    <input class="input" name="senha" type="password" pattern="^[^*]{8}" id="senha" value="{{ senha }}" title="preencha com 8 caracteres" required>
+                                </div>
+                            </div>
+                            <p class="has-text-centered"><button type="reset" class="button is-warning">Limpar</button><button type="submit" class="button is-success">Logar</button></p>
+                            {% if erro == true %}
+                                <p class="has-text-danger has-text-centered">Email ou senha incorretos.</p>
+                            {% endif %}
+                            <p class="has-text-centered"><a href="{{ path_for('cadastro')}}">Não possui cadastro? cadastre-se aqui!</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

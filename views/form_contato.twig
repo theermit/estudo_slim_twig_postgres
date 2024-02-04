@@ -1,0 +1,82 @@
+{% extends 'template.twig' %}
+{% block titulo%}Cadastro{% endblock %}
+{% block content %}
+    <div class="columns is-centered">
+        <div class="column is-5">
+            <div class="box" style="margin-top: 90px;">
+                <div class="columns">
+                    <div class="column is-full">
+                        {% if incluir_contato == true %}
+                            {% set path = path_for('criarContato') %}
+                        {% endif %}
+                        {% if alterar_contato == true %}
+                            {% set path = path_for('atualizarContato') %}
+                        {% endif %}
+                        {% if apagar_contato == true %}
+                            {% set path = path_for('apagarContato') %}
+                        {% endif %}
+                        {% if alterar_contato == true or apagar_contato == true %}
+                            <input type="hidden" name="id" value="{{ id }}">
+                        {% endif %}
+                        <form method="post" action="{{ path }}">
+                            {% if incluir_contato == true %}
+                                <h1 class="title has-text-centered">Incluir contato</h1>
+                            {% endif %}
+                            {% if alterar_contato == true %}
+                                <h1 class="title has-text-centered">Alterar contato</h1>
+                            {% endif %}
+                            {% if apagar_contato == true %}
+                                <h1 class="title has-text-centered">Apagar contato</h1>
+                                {% set somente_leitura = "readonly" %}
+                            {% endif %}
+                            {% if alterar_contato == true or apagar_contato == true %}
+                                <input type="hidden" name="id" value="{{ id }}">
+                            {% endif %}
+                            <div class="field">
+                                <label class="label" for="nome">Nome</label>
+                                <div class="control">
+                                    {% if erro_nome == true %}
+                                        {% set erro_nome = "input is-danger" %}
+                                    {% else %}
+                                        {% set erro_nome = "input" %}
+                                    {% endif %}
+                                    <input class="{{erro_nome}}" type="text" name="nome" id="nome" title="Preencha com pelo menos 3 caracteres" pattern="^[^*]{3,}$" value="{{ nome }}" required {{somente_leitura}}>
+                                    {% if erro_nome == true %}
+                                        <p class="help">Preencha o nome.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="telefone">Telefone</label>
+                                <div class="control">
+                                    {% if erro_telefone == true %}
+                                        {% set classe_telefone = "input is-danger" %}
+                                    {% else %}
+                                        {% set classe_telefone = "input" %}
+                                    {% endif %}
+                                    <input class="{{classe_telefone}}" type="tel" name="telefone" id="telefone"  value="{{telefone}}" title="preencha com telefone" required {{somente_leitura}}>
+                                    {% if erro_telefone == true %}
+                                        <p class="help">Preencha o telefone.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <p class="has-text-centered">
+                                <a href="{{path_for('agenda')}}" class="button is-warning">Voltar</a>
+                                {% if incluir_contato == true %}
+                                    <button type="submit" class="button is-success">Incluir</button>
+                                {% endif %}
+                                {% if alterar_contato == true %}
+                                    <button type="submit" class="button is-success">Alterar</button>
+                                {% endif %}
+                                {% if apagar_contato == true %}
+                                    <button type="submit" class="button is-success">Apagar</button>
+                                {% endif %}
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

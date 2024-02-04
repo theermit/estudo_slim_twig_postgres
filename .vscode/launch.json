@@ -1,0 +1,17 @@
+{
+    "configurations": [
+    {
+        "name": "Launch built-in server",
+        "type": "php",
+        "request": "launch",
+        "runtimeArgs": [
+            "-S",
+            "localhost:3000",
+            "-t",
+            "."
+        ],
+        "port": 9003,
+        "serverReadyAction": {
+            "action": "openExternally"
+        }
+    }]
